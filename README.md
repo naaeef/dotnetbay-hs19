@@ -1,7 +1,4 @@
 # dotnetbay - A .NET Auction Bootstrapper 
-Master: [![Build status](https://ci.appveyor.com/api/projects/status/icb7nq9u7spaapfx/branch/master?svg=true)](https://ci.appveyor.com/project/michaelschnyder/dotnetbay-hs16/branch/master)
-Project: [![Build status](https://ci.appveyor.com/api/projects/status/icb7nq9u7spaapfx?svg=true)](https://ci.appveyor.com/project/michaelschnyder/dotnetbay-hs16)
-
 A bootstrap solution to build your own basic auction portal.
 
 ## Goals
@@ -21,7 +18,7 @@ See more details on the official course website: http://web.fhnw.ch/plattformen/
 The following products / tools are needed to contribute / fork.
 
 **For Development**
-* Microsoft Visual Studio 2015 (at least Community Version). [https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx "https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx")
+* Microsoft Visual Studio 2015 or greater (at least Community Version). [https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx "https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx")
 * JetBrains ReSharper [https://www.jetbrains.com/student/](https://www.jetbrains.com/student/ "https://www.jetbrains.com/student/")
 
 **For Pleasure**
@@ -31,6 +28,7 @@ The following products / tools are needed to contribute / fork.
 ## Authors
 * Michael Schnyder
 * Martin Kropp
+* Daniel Pfulg
 
 ## License
 Licensed under the MIT License
