@@ -1,7 +1,11 @@
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using DotNetBay.Core;
 using DotNetBay.Data.Entity;
 
@@ -42,6 +46,19 @@ namespace DotNetBay.WPF
             }
 
 
+        }
+
+        private void newBidBtn_Click(object sender, RoutedEventArgs args)
+        {
+            Button button = (Button) args.Source;
+            Auction ac = (Auction)button.DataContext;
+            var bidView = new BidView(ac);
+            bidView.ShowDialog();
+
+            // Calling anyone?
+            // update current price, no of bids, currrent winner
+            var allAuctionsFromService = this.auctionService.GetAll();
+            this.Auctions = new ObservableCollection<Auction>(allAuctionsFromService);
         }
 
         private void newAuctionBtn_Click(object sender, RoutedEventArgs e)
