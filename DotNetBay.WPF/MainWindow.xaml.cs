@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -76,5 +76,22 @@ namespace DotNetBay.WPF
             }
         }
 
+    }
+
+    /// <summary>
+    /// Lab02 class converts boolean values to auction status string
+    /// </summary>
+    public class BooleanToStatusTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Boolean auctionClosed = (Boolean)value;
+            return auctionClosed ? "closed" : "open";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
