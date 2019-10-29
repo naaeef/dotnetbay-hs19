@@ -40,6 +40,7 @@ namespace DotNetBay.WPF
                 this.auctionService = new AuctionService(app.MainRepository, simpleMemberService);
             }
 
+            // set minimum bid to the higher of either start price or current price
             this.YourBid = Math.Max(this.SelectedAuction.CurrentPrice, this.SelectedAuction.StartPrice);
         }
 
