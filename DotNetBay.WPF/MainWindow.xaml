@@ -1,4 +1,4 @@
-﻿<Window x:Class="DotNetBay.WPF.MainWindow"
+<Window x:Class="DotNetBay.WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,31 +7,55 @@
         d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="725">
+    <Window.Resources>
+        <local:BooleanToStatusTextConverter x:Key="BooleanToStatus" />
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+    </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="649*"/>
+            <ColumnDefinition Width="68*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="37"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="WPF Auction Plattform" Grid.Row="0" FontFamily="Britannic Bold" Foreground="BlueViolet" FontSize="16" FontStyle="Italic" FontWeight="Bold"/>
-        <Button x:Name="NewAuctionBtn" Content="New Auction" HorizontalAlignment="Left" Margin="10,1.2,0,0" VerticalAlignment="Top" Width="75" Click="newAuctionBtn_Click" Grid.Row="1"/>
-        <DataGrid Name="AuctionsDataGrid" Grid.Row="2" ItemsSource="{Binding Auctions}" AutoGenerateColumns="False" IsReadOnly="True">
+        <Label Content="WPF Auction Plattform" Grid.Row="0" FontFamily="Britannic Bold" Foreground="BlueViolet" FontSize="16" FontStyle="Italic" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Button x:Name="NewAuctionBtn" Content="New Auction" HorizontalAlignment="Left" Margin="10,1,0,0" VerticalAlignment="Top" Width="75" Click="newAuctionBtn_Click" Grid.Row="1"/>
+        <DataGrid Name="AuctionsDataGrid" Grid.Row="2" ItemsSource="{Binding Auctions}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,-186,0" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}" />
-                <DataGridTextColumn Header="IsClosed" Binding="{Binding Path= IsClosed}" />
+                <!-- Lab 2) 1.1 -->
+                <DataGridTemplateColumn Header="Auction">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold" ></TextBlock>
+                                <Image Source="{Binding Image}" MaxHeight="100" MaxWidth="120"></Image>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- Lab 2) 1.1 -->
+                <DataGridTextColumn Header="IsClosed" Binding="{Binding IsClosed, Converter={StaticResource BooleanToStatus}}" />
                 <DataGridTextColumn Header="Start Price" Binding="{Binding StartPrice, StringFormat=\{0:C\}}" />
                 <DataGridTextColumn Header="Current Price" Binding="{Binding CurrentPrice, StringFormat=\{0:C\}}" />
-                <DataGridTextColumn Header="Bids" Binding="{Binding Path= Bids}" />
+                <DataGridTextColumn Header="Bids" Binding="{Binding Path= Bids.Count}" />
                 <DataGridTextColumn Header="Start Date" Binding="{Binding Path= StartDateTimeUtc}" />
                 <DataGridTextColumn Header="End Date" Binding="{Binding Path= EndDateTimeUtc}" />
                 <DataGridTextColumn Header="Seller" Binding="{Binding Path= Seller.DisplayName}" />
                 <DataGridTextColumn Header="Current Winner" Binding="{Binding Path= ActiveBid.Bidder.DisplayName}" />
                 <DataGridTextColumn Header="Closed" Binding="{Binding Path= CloseDateTimeUtc}" />
-                <DataGridTextColumn Header="Place Bid"  />
-
+                <!-- Lab 2) 1.1 -->
+                <DataGridTemplateColumn Header="Place Bid">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="newBidBtn_Click" Background="Green" Visibility="{Binding IsRunning, Converter={StaticResource BoolToVisibility}}">Place</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!-- Lab 2) 1.1 -->
             </DataGrid.Columns>
-
         </DataGrid>
-
     </Grid>
 </Window>
