@@ -42,7 +42,9 @@ namespace DotNetBay.WPF
             if (app != null)
             {
                 this.auctionService = new AuctionService(app.MainRepository, new SimpleMemberService(app.MainRepository));
+                // how to register for events?
                 this.auctions = new ObservableCollection<Auction>(this.auctionService.GetAll());
+                
             }
 
 
@@ -63,7 +65,7 @@ namespace DotNetBay.WPF
 
         private void newAuctionBtn_Click(object sender, RoutedEventArgs e)
         {
-            var sellView = new SellView();
+            var sellView = new View.SellView();
             sellView.ShowDialog(); // Blocking
 
             var allAuctionsFromService = this.auctionService.GetAll();
