@@ -14,23 +14,39 @@ namespace DotNetBay.WPF.ViewModel
     {
         private readonly AuctionService auctionService;
 
-        private readonly Auction newAuction;
+        private Auction newAuction;
+        public Auction NewAuction { get => newAuction; }
 
-        private string filePathToImage;
+        private string title;
+        public string Title {
+            get { return newAuction.Title; }
+            set { newAuction.Title = value; OnPropertyChanged(nameof(Title)); }
+        }
+        public string Description {
+            get { return newAuction.Description; }
+            set { newAuction.Description = value; OnPropertyChanged(nameof(Description)); } }
+             
 
-        // needed?
-        private Window sellView;
+        private int price;
+        public double Price {
+            get { return newAuction.StartPrice; }
+            set { newAuction.StartPrice = value; OnPropertyChanged(nameof(Price)); } }
 
-        public Auction NewAuction
+        public DateTime StartDateTimeUtc
         {
-            get
-            {
-                return newAuction;
-            }
+            get { return newAuction.StartDateTimeUtc; }
+            set { newAuction.StartDateTimeUtc = value; OnPropertyChanged(nameof(StartDateTimeUtc)); }
         }
 
+        public DateTime EndDateTimeUtc
+        {
+            get { return newAuction.EndDateTimeUtc; }
+            set { newAuction.EndDateTimeUtc= value; OnPropertyChanged(nameof(EndDateTimeUtc)); }
+        }
 
-        public string FilePathToImage {
+        private string filePathToImage;
+        public string FilePathToImage
+        {
             get
             {
                 return filePathToImage;
@@ -43,15 +59,9 @@ namespace DotNetBay.WPF.ViewModel
 
                     // allow only for jpg files
                     if (fileInfo.Extension.EndsWith("jpg"))
-                    {
-                        
-                        NewAuction.Image = File.ReadAllBytes(value);
-
-                        // probably to viewmodel, right?
-                        if (this.FilePathToImage != null)
-                        {
-                            this.OnPropertyChanged(nameof(this.FilePathToImage));
-                        }
+                    {    
+                        filePathToImage = value;               
+                        OnPropertyChanged(nameof(filePathToImage));
                     }
                 }
                 
@@ -60,6 +70,7 @@ namespace DotNetBay.WPF.ViewModel
 
         public SellViewModel()
         {
+            newAuction = new Auction();
             FilePathToImage = "<select image with extension jpg>";
             var app = Application.Current as App;
 
@@ -67,17 +78,18 @@ namespace DotNetBay.WPF.ViewModel
             {
                 var simpleMemberService = new SimpleMemberService(app.MainRepository);
                 this.auctionService = new AuctionService(app.MainRepository, simpleMemberService);
-                this.newAuction = new Auction
-                {
-                    Seller = simpleMemberService.GetCurrentMember(),
-                    StartDateTimeUtc = DateTime.UtcNow,
-                    EndDateTimeUtc = DateTime.UtcNow.AddDays(7)
-                };
+//                this.newAuction = new Auction
+  //              {
+    //                Seller = simpleMemberService.GetCurrentMember(),
+      //              StartDateTimeUtc = DateTime.UtcNow,
+        //            EndDateTimeUtc = DateTime.UtcNow.AddDays(7)
+          //      };
             }
         }
 
         public void Save()
         {
+            NewAuction.Image = File.ReadAllBytes(filePathToImage);
             auctionService.Save(newAuction);
         }
     }

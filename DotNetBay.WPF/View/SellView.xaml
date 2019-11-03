@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:DotNetBay.WPF.View"
         xmlns:wpftk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
+        xmlns:viewModel="clr-namespace:DotNetBay.WPF.ViewModel"
+        
         Title="SellView" Height="450" Width="800">
+    <Window.DataContext>
+        <!-- <d:DataContext="{d:DesignInstance Type=local:SellView}" -->
+        <!-- Declaratively create an instance of our ViewModel -->
+        <viewModel:SellViewModel />
+    </Window.DataContext>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -41,7 +48,7 @@
 
             <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NewAuction.Title}"/>
             <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="90" Grid.Row="1" Grid.Column="1" Text="{Binding NewAuction.Description}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NewAuction.StartPrice}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding StartPrice}"/>
 
             <wpftk:DateTimePicker Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Value="{Binding NewAuction.StartDateTimeUtc}" Width="240"></wpftk:DateTimePicker>
             <wpftk:DateTimePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Value="{Binding NewAuction.EndDateTimeUtc}"  Width="240"></wpftk:DateTimePicker>

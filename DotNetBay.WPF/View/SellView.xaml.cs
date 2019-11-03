@@ -27,8 +27,7 @@ namespace DotNetBay.WPF.View
         public SellView()
         {
             InitializeComponent();
-            viewModel = new SellViewModel();
-            this.DataContext = viewModel;
+            viewModel = (SellViewModel)this.DataContext;
         }
 
         private void AddAuctionClick(object sender, RoutedEventArgs e)

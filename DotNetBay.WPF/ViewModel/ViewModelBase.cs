@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DotNetBay.WPF.ViewModel
 {
-    class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
